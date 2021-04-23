@@ -1,9 +1,16 @@
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 
-let mode = process.env.NODE_ENV === "production" ? "production" : "development"
+let mode = "development"
+let target = "web" 
+
+if(process.env.NODE_ENV === "production") {
+    mode = "production"
+    target = "browserslist"
+}
 
 module.exports = {
     mode: mode,
+    target: target,
     devtool: "source-map",
     module: {
         rules: [
@@ -26,7 +33,7 @@ module.exports = {
         ],
     },
 
-    plugins: [new MiniCssExtractPlugin],
+    plugins: [new MiniCssExtractPlugin()],
     devServer: {
         contentBase: "./dist/",
         hot: true,
